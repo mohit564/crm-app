@@ -1,10 +1,35 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./Login.css";
 
+import HomeNav from "../HomeNav";
+import Footer from "../Footer";
+import TextError from "./TextError";
+
 function LoginPage() {
+  const style = {
+    textDecoration: "none",
+  };
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string().required("Required"),
+  });
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <>
+      <HomeNav />
       <main className="bg-primary login-page">
         <div className="container">
           <div className="row justify-content-center">
@@ -14,69 +39,89 @@ function LoginPage() {
                   <h3 className="text-center font-weight-light my-4">Login</h3>
                 </div>
                 <div className="card-body">
-                  <form>
-                    <div className="form-floating mb-3">
-                      <input
-                        className="form-control"
-                        id="inputEmail"
-                        type="email"
-                        placeholder="name@example.com"
-                      />
-                      <label htmlFor="inputEmail">Email address</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input
-                        className="form-control"
-                        id="inputPassword"
-                        type="password"
-                        placeholder="Password"
-                      />
-                      <label htmlFor="inputPassword">Password</label>
-                    </div>
-                    <div className="form-check mb-3">
-                      <input
-                        className="form-check-input"
-                        id="inputRememberPassword"
-                        type="checkbox"
-                        value=""
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="inputRememberPassword"
-                      >
-                        Remember Password
-                      </label>
-                    </div>
-                    <div
-                      className="
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                  >
+                    {(formik) => {
+                      return (
+                        <Form>
+                          <div className="form-floating mb-3">
+                            <Field
+                              type="email"
+                              id="email"
+                              name="email"
+                              className="form-control"
+                              placeholder="name@example.com"
+                              autoComplete="off"
+                            />
+                            <label htmlFor="email">Email address</label>
+                            <ErrorMessage name="email" component={TextError} />
+                          </div>
+                          <div className="form-floating mb-3">
+                            <Field
+                              type="password"
+                              id="password"
+                              name="password"
+                              className="form-control"
+                              placeholder="Password"
+                              autoComplete="off"
+                            />
+                            <label htmlFor="password">Password</label>
+                            <ErrorMessage
+                              name="password"
+                              component={TextError}
+                            />
+                          </div>
+                          <div className="form-check mb-3">
+                            <input
+                              className="form-check-input"
+                              id="inputRememberPassword"
+                              type="checkbox"
+                              value=""
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="inputRememberPassword"
+                            >
+                              Remember Password
+                            </label>
+                          </div>
+                          <div
+                            className="
                           d-flex
                           align-items-center
                           justify-content-between
                           mt-4
                           mb-0
                         "
-                    >
-                      <a className="small" href="password.html">
-                        Forgot Password?
-                      </a>
-                      <a className="btn btn-primary" href="index.html">
-                        Login
-                      </a>
-                    </div>
-                  </form>
+                          >
+                            <Link
+                              to="/forget-password"
+                              className="small"
+                              style={style}
+                            >
+                              Forgot Password
+                            </Link>
+                            <button
+                              className="btn btn-primary"
+                              disabled={!formik.isValid}
+                            >
+                              Login
+                            </button>
+                          </div>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <footer className="footer bg-dark text-white">
-        <div className="container ">
-          <p className="py-3 mb-0">
-            &copy; Copyright {new Date().getFullYear()}, Created by Mohit Dhule
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

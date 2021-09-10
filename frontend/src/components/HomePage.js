@@ -1,18 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./HomePage.css";
+
+import HomeNav from "./HomeNav";
+import Footer from "./Footer";
 
 function HomePage() {
   return (
     <>
-      <header>
-        <nav className="navbar navbar-dark bg-dark text-white">
-          <div className="container">
-            <span className="navbar-brand mb-0">CRM App</span>
-            <button className="btn btn-primary px-4 m-2 my-sm-0">Login</button>
-          </div>
-        </nav>
-      </header>
+      <HomeNav />
       <main>
         <div className="jumbotron">
           <div className="container">
@@ -67,13 +64,7 @@ function HomePage() {
           </div>
         </div>
       </main>
-      <footer className="footer bg-dark text-white">
-        <div className="container ">
-          <p className="py-3 mb-0">
-            &copy; Copyright {new Date().getFullYear()}, Created by Mohit Dhule
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

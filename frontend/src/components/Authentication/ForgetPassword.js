@@ -1,10 +1,34 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import "./ForgetPassword.css";
 
+import HomeNav from "../HomeNav";
+import Footer from "../Footer";
+import TextError from "./TextError";
+
 function ForgetPassword() {
+  const style = {
+    textDecoration: "none",
+  };
+
+  const initialValues = {
+    email: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email format").required("Required"),
+  });
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <>
+      <HomeNav />
       <main className="bg-primary forget-password-page">
         <div className="container">
           <div className="row justify-content-center">
@@ -20,46 +44,56 @@ function ForgetPassword() {
                     Enter your email address and we will send you a link to
                     reset your password.
                   </div>
-                  <form>
-                    <div className="form-floating mb-3">
-                      <input
-                        className="form-control"
-                        id="inputEmail"
-                        type="email"
-                        placeholder="name@example.com"
-                      />
-                      <label htmlFor="inputEmail">Email address</label>
-                    </div>
-                    <div
-                      className="
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                  >
+                    {(formik) => {
+                      return (
+                        <Form>
+                          <div className="form-floating mb-3">
+                            <Field
+                              type="email"
+                              name="email"
+                              id="email"
+                              className="form-control"
+                              placeholder="name@example.com"
+                              autoComplete="off"
+                            />
+                            <label htmlFor="email">Email address</label>
+                            <ErrorMessage name="email" component={TextError} />
+                          </div>
+                          <div
+                            className="
                           d-flex
                           align-items-center
                           justify-content-between
                           mt-4
                           mb-0
                         "
-                    >
-                      <a className="small" href="login.html">
-                        Return to login
-                      </a>
-                      <a className="btn btn-primary" href="login.html">
-                        Reset Password
-                      </a>
-                    </div>
-                  </form>
+                          >
+                            <Link to="/login" className="small" style={style}>
+                              Return to login
+                            </Link>
+                            <button
+                              className="btn btn-primary"
+                              disabled={!formik.isValid}
+                            >
+                              Reset Password
+                            </button>
+                          </div>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <footer className="footer bg-dark text-white">
-        <div className="container ">
-          <p className="py-3 mb-0">
-            &copy; Copyright {new Date().getFullYear()}, Created by Mohit Dhule
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 
 import "./Register.css";
 
+import Footer from "../Footer";
+
 function RegisterPage() {
   return (
     <>
@@ -138,13 +140,7 @@ function RegisterPage() {
           </div>
         </div>
       </div>
-      <footer className="footer bg-dark text-white">
-        <div className="container ">
-          <p className="py-3 mb-0">
-            &copy; Copyright {new Date().getFullYear()}, Created by Mohit Dhule
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
