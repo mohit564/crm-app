@@ -77,6 +77,7 @@ function ForgetPassword() {
                               Return to login
                             </Link>
                             <button
+                              type="submit"
                               className="btn btn-primary"
                               disabled={!formik.isValid}
                             >

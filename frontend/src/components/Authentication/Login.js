@@ -105,6 +105,7 @@ function LoginPage() {
                               Forgot Password
                             </Link>
                             <button
+                              type="submit"
                               className="btn btn-primary"
                               disabled={!formik.isValid}
                             >
