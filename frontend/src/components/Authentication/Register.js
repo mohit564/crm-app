@@ -1,10 +1,39 @@
 import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import "./Register.css";
 
+import TextError from "./TextError";
 import Footer from "../Footer";
 
 function RegisterPage() {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+  };
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string()
+      .required("")
+      .min(6, "Password is too short - should be 6 chars minimum."),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), ""], "Password must match")
+      .required("Required"),
+    role: Yup.string().required("Required"),
+  });
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <>
       <div className="bg-primary register-page">
@@ -18,122 +47,164 @@ function RegisterPage() {
                   </h3>
                 </div>
                 <div className="card-body">
-                  <form>
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <div className="form-floating mb-3 mb-md-0">
-                          <input
-                            className="form-control"
-                            id="inputFirstName"
-                            type="text"
-                            placeholder="Enter your first name"
-                          />
-                          <label htmlFor="inputFirstName">First name</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-floating">
-                          <input
-                            className="form-control"
-                            id="inputLastName"
-                            type="text"
-                            placeholder="Enter your last name"
-                          />
-                          <label htmlFor="inputLastName">Last name</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input
-                        className="form-control"
-                        id="inputEmail"
-                        type="email"
-                        placeholder="name@example.com"
-                      />
-                      <label htmlFor="inputEmail">Email address</label>
-                    </div>
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <div className="form-floating mb-3 mb-md-0">
-                          <input
-                            className="form-control"
-                            id="inputPassword"
-                            type="password"
-                            placeholder="Create a password"
-                          />
-                          <label htmlFor="inputPassword">Password</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-floating mb-3 mb-md-0">
-                          <input
-                            className="form-control"
-                            id="inputPasswordConfirm"
-                            type="password"
-                            placeholder="Confirm password"
-                          />
-                          <label htmlFor="inputPasswordConfirm">
-                            Confirm Password
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ps-2">
-                      <h6 className="fw-bold mt-3">Role</h6>
-                      <div className="form-check form-check-inline">
-                        <input
-                          type="radio"
-                          className="form-check-input"
-                          name="radioInline"
-                          id="radioInline1"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="radioInline1"
-                        >
-                          Admin
-                        </label>
-                      </div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          type="radio"
-                          className="form-check-input"
-                          name="radioInline"
-                          id="radioInline2"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="radioInline2"
-                        >
-                          Manager
-                        </label>
-                      </div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          type="radio"
-                          className="form-check-input"
-                          name="radioInline"
-                          id="radioInline3"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="radioInline3"
-                        >
-                          Employee
-                        </label>
-                      </div>
-                    </div>
-                    <div className="mt-4 mb-0">
-                      <div className="d-grid">
-                        <a
-                          className="btn btn-primary btn-block"
-                          href="login.html"
-                        >
-                          Create Account
-                        </a>
-                      </div>
-                    </div>
-                  </form>
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                  >
+                    {(formik) => {
+                      return (
+                        <Form>
+                          <div className="row mb-3">
+                            <div className="col-md-6">
+                              <div className="form-floating mb-3 mb-md-0">
+                                <Field
+                                  className="form-control"
+                                  type="text"
+                                  name="firstName"
+                                  id="firstName"
+                                  placeholder="Enter your first name"
+                                  autoComplete="off"
+                                />
+                                <label htmlFor="firstName">First name</label>
+                                <ErrorMessage
+                                  name="firstName"
+                                  component={TextError}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-floating">
+                                <Field
+                                  className="form-control"
+                                  type="text"
+                                  name="lastName"
+                                  id="lastName"
+                                  placeholder="Enter your last name"
+                                  autoComplete="off"
+                                />
+                                <label htmlFor="lastName">Last name</label>
+                                <ErrorMessage
+                                  name="lastName"
+                                  component={TextError}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="form-floating mb-3">
+                            <Field
+                              className="form-control"
+                              type="email"
+                              name="email"
+                              id="email"
+                              placeholder="name@example.com"
+                              autoComplete="off"
+                            />
+                            <label htmlFor="email">Email address</label>
+                            <ErrorMessage name="email" component={TextError} />
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col-md-6">
+                              <div className="form-floating mb-3 mb-md-0">
+                                <Field
+                                  className="form-control"
+                                  type="password"
+                                  name="password"
+                                  id="password"
+                                  placeholder="Create a password"
+                                  autoComplete="off"
+                                />
+                                <label htmlFor="password">Password</label>
+                                <ErrorMessage
+                                  name="password"
+                                  component={TextError}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-floating mb-3 mb-md-0">
+                                <Field
+                                  className="form-control"
+                                  type="password"
+                                  name="confirmPassword"
+                                  id="confirmPassword"
+                                  placeholder="Confirm password"
+                                  autoComplete="off"
+                                />
+                                <label htmlFor="confirmPassword">
+                                  Confirm Password
+                                </label>
+                                <ErrorMessage
+                                  name="confirmPassword"
+                                  component={TextError}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="ps-2">
+                            <h6 className="fw-bold mt-3">Role</h6>
+                            <div className="form-check form-check-inline">
+                              <Field
+                                className="form-check-input"
+                                type="radio"
+                                name="role"
+                                id="admin"
+                                value="admin"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="role"
+                              >
+                                Admin
+                              </label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                              <Field
+                                className="form-check-input"
+                                type="radio"
+                                name="role"
+                                id="manager"
+                                value="manager"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="role"
+                              >
+                                Manager
+                              </label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                              <Field
+                                className="form-check-input"
+                                type="radio"
+                                name="role"
+                                id="employee"
+                                value="employee"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="role"
+                              >
+                                Employee
+                              </label>
+                            </div>
+                            <ErrorMessage name="role" component={TextError} />
+                          </div>
+                          <div className="mt-4 mb-0">
+                            <div className="d-grid">
+                              <button
+                                type="submit"
+                                className="btn btn-primary btn-block"
+                                disabled={!formik.isValid}
+                              >
+                                Create Account
+                              </button>
+                            </div>
+                          </div>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
                 </div>
               </div>
             </div>
