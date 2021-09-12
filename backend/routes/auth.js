@@ -47,7 +47,7 @@ async function sendMail(receiverMail, data) {
 
     const mailOptions = {
       from: "CRM Application <mohitmdhule@gmail.com>",
-      to: "mohitdhule11@gmail.com",
+      to: receiverMail,
       subject: "PASSWORD RESET LINK - CRM Application",
       html: data,
     };
