@@ -32,33 +32,51 @@ function HomePage() {
             </p>
           </div>
         </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <h2>Heading</h2>
+        <div className="container marketing">
+          <div className="row text-center">
+            <div className="col-lg-4 mb-3">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                className="rounded-circle"
+                width="110"
+                height="110"
+                title="Customer"
+                alt="Customer"
+              />
+              <h3>Customer 1</h3>
               <p>
                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                magna mollis euismod. Donec sed odio dui.{" "}
+                tellus ac cursus commodo, tortor mauris condimentum nibh.
               </p>
             </div>
-            <div className="col-md-4">
-              <h2>Heading</h2>
+            <div className="col-lg-4 mb-3">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                className="rounded-circle"
+                width="110"
+                height="110"
+                title="Customer"
+                alt="Customer"
+              />
+              <h3>Customer 2</h3>
               <p>
                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                magna mollis euismod. Donec sed odio dui.{" "}
+                tellus ac cursus commodo, tortor mauris condimentum nibh.
               </p>
             </div>
-            <div className="col-md-4">
-              <h2>Heading</h2>
+            <div className="col-lg-4 mb-3">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar5.png"
+                className="rounded-circle"
+                width="110"
+                height="110"
+                title="Customer"
+                alt="Customer"
+              />
+              <h3>Customer 3</h3>
               <p>
-                Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-                egestas eget quam. Vestibulum id ligula porta felis euismod
-                semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus.
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
+                tellus ac cursus commodo, tortor mauris condimentum nibh.
               </p>
             </div>
           </div>

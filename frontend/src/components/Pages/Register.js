@@ -1,13 +1,21 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
-import "./Register.css";
-
-import TextError from "./TextError";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 import Footer from "../Footer";
 
-function RegisterPage() {
+import TextError from "../Authentication/TextError";
+
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+
+const server = axios.create({
+  baseURL: SERVER_URL,
+});
+
+function Register() {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -30,14 +38,23 @@ function RegisterPage() {
     role: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values, { resetForm }) => {
+    try {
+      const response = await server.post("/api/user/register", values);
+      alert("Account created successfully.");
+    } catch (error) {
+      alert(error.response.data.message);
+    } finally {
+      resetForm();
+    }
   };
 
   return (
     <>
-      <div className="bg-primary register-page">
-        <div className="container">
+      <Header />
+      <main className="d-flex">
+        <Sidebar />
+        <div className="bg-primary w-100">
           <div className="row justify-content-center">
             <div className="col-lg-7">
               <div className="card shadow-lg border-0 rounded-lg mt-5">
@@ -210,10 +227,10 @@ function RegisterPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );
 }
 
-export default RegisterPage;
+export default Register;

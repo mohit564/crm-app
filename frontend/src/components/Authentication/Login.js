@@ -1,14 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+
 import "./Login.css";
 
 import HomeNav from "../HomeNav";
 import Footer from "../Footer";
 import TextError from "./TextError";
 
-function LoginPage() {
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+
+const server = axios.create({
+  baseURL: SERVER_URL,
+});
+
+function Login() {
+  const history = useHistory();
+
   const style = {
     textDecoration: "none",
   };
@@ -23,8 +33,17 @@ function LoginPage() {
     password: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values, { resetForm }) => {
+    try {
+      const response = await server.post("/api/user/login", values);
+      localStorage.setItem("token", response.data.token);
+      history.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+    } finally {
+      resetForm();
+    }
   };
 
   return (
@@ -127,4 +146,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

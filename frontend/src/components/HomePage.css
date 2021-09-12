@@ -5,6 +5,20 @@
   border-radius: 0.3rem;
 }
 
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.marketing h2 {
+  font-weight: 400;
+}
+
+.marketing .col-lg-4 p {
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
+}
+
 @media (min-width: 576px) {
   .jumbotron {
     padding: 4rem 2rem;

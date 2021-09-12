@@ -2,12 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 import "./ForgetPassword.css";
 
 import HomeNav from "../HomeNav";
 import Footer from "../Footer";
 import TextError from "./TextError";
+
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+
+const server = axios.create({
+  baseURL: SERVER_URL,
+});
 
 function ForgetPassword() {
   const style = {
@@ -22,8 +29,15 @@ function ForgetPassword() {
     email: Yup.string().email("Invalid email format").required("Required"),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values, { resetForm }) => {
+    try {
+      const response = await server.post("/api/user/forget-password", values);
+      alert(response.data);
+    } catch (error) {
+      alert(error.response.data.message);
+    } finally {
+      resetForm();
+    }
   };
 
   return (
