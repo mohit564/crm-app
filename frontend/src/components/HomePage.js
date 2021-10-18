@@ -32,7 +32,8 @@ function HomePage() {
             </p>
           </div>
         </div>
-        <div className="container marketing">
+        <div className="container testimonial pb-sm-5">
+          <h2 className="text-center pb-4">Testimonials</h2>
           <div className="row text-center">
             <div className="col-lg-4 mb-3">
               <img
@@ -43,7 +44,7 @@ function HomePage() {
                 title="Customer"
                 alt="Customer"
               />
-              <h3>Customer 1</h3>
+              <h4 className="py-2">Customer 1</h4>
               <p>
                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
                 tellus ac cursus commodo, tortor mauris condimentum nibh.
@@ -58,7 +59,7 @@ function HomePage() {
                 title="Customer"
                 alt="Customer"
               />
-              <h3>Customer 2</h3>
+              <h4 className="py-2">Customer 2</h4>
               <p>
                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
                 tellus ac cursus commodo, tortor mauris condimentum nibh.
@@ -73,7 +74,7 @@ function HomePage() {
                 title="Customer"
                 alt="Customer"
               />
-              <h3>Customer 3</h3>
+              <h4 className="py-2">Customer 3</h4>
               <p>
                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
                 tellus ac cursus commodo, tortor mauris condimentum nibh.

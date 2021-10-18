@@ -13,11 +13,6 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/register" className="nav-link text-white">
-            Create new user
-          </Link>
-        </li>
-        <li>
           <Link to="/users" className="nav-link text-white">
             Users
           </Link>

@@ -13,9 +13,18 @@ function HomeNav() {
           <Link style={style} to="/">
             <span className="navbar-brand mb-0">CRM App</span>
           </Link>
-          <Link to="/login">
-            <button className="btn btn-primary px-4 m-2 my-sm-0">Login</button>
-          </Link>
+          <div>
+            <Link to="/login">
+              <button className="btn btn-primary px-4 m-2 my-sm-0">
+                Login
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="btn btn-success px-4 m-2 my-sm-0">
+                Register
+              </button>
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

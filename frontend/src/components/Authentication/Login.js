@@ -51,9 +51,9 @@ function Login() {
       <HomeNav />
       <main className="bg-primary login-page">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-5">
-              <div className="card shadow-lg border-0 rounded-lg mt-5">
+          <div className="row justify-content-center p-3">
+            <div className="col-md-7">
+              <div className="card shadow-lg border-0 rounded-lg">
                 <div className="card-header">
                   <h3 className="text-center font-weight-light my-4">Login</h3>
                 </div>
@@ -125,7 +125,7 @@ function Login() {
                             </Link>
                             <button
                               type="submit"
-                              className="btn btn-primary"
+                              className="btn btn-primary px-4"
                               disabled={!formik.isValid}
                             >
                               Login
@@ -135,6 +135,11 @@ function Login() {
                       );
                     }}
                   </Formik>
+                </div>
+                <div className="card-footer text-center py-3">
+                  <div className="small">
+                    <Link to="/register">Need an account? Sign up!</Link>
+                  </div>
                 </div>
               </div>
             </div>
