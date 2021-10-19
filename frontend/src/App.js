@@ -8,10 +8,10 @@ import Login from "./components/Authentication/Login";
 import ForgetPassword from "./components/Authentication/ForgetPassword";
 import Dashboard from "./components/Pages/Dashboard";
 import Register from "./components/Authentication/Register";
-import Users from "./components/Pages/Users";
-import Leads from "./components/Pages/Leads";
-import Contacts from "./components/Pages/Contacts";
-import ServiceRequests from "./components/Pages/ServiceRequests";
+import Users from "./components/Users/Users";
+import Leads from "./components/Leads/Leads";
+import Contacts from "./components/Contacts/Contacts";
+import ServiceRequests from "./components/ServiceRequests/ServiceRequests";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/NotFound";
 
@@ -24,11 +24,17 @@ const App = (props) => {
         <Route path="/register" component={Register} />
         <Route path="/forget-password" component={ForgetPassword} />
 
-        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/users" component={Users} />
+        <Route path="/leads" component={Leads} />
+        <Route path="/contacts" component={Contacts} />
+        <Route path="/service-requests" component={ServiceRequests} />
+
+        {/* <ProtectedRoute path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/users" component={Users} />
         <ProtectedRoute path="/leads" component={Leads} />
         <ProtectedRoute path="/contacts" component={Contacts} />
-        <ProtectedRoute path="/service-requests" component={ServiceRequests} />
+        <ProtectedRoute path="/service-requests" component={ServiceRequests} /> */}
 
         <Route path="*" component={NotFound} />
       </Switch>

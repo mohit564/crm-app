@@ -5,7 +5,10 @@ import "./Sidebar.css";
 
 function Sidebar() {
   return (
-    <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar">
+    <div id="sidebar" className="d-flex flex-column p-3 text-white bg-dark">
+      <Link to="/" className="nav-link text-white">
+        <h5>CRM APP</h5>
+      </Link>
       <ul className="nav nav-pills flex-column mb-auto">
         <li>
           <Link to="/dashboard" className="nav-link text-white">
