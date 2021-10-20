@@ -23,7 +23,7 @@ function Contacts() {
             <h6 className="m-0">Contacts</h6>
           </div>
           <div className="card-body">
-            <Link className="btn btn-secondary mb-4" to="/create-contact">
+            <Link className="btn btn-secondary mb-4" to="/contact/create">
               Create Contact
             </Link>
             <div className="table-responsive">
@@ -55,7 +55,7 @@ function Contacts() {
                         <td>{contact.company}</td>
                         <td className="d-flex gap-2">
                           <Link
-                            to={`/edit-contact/${index + 1}`}
+                            to={`/contacts/edit/${index + 1}`}
                             className="btn btn-sm btn-primary"
                           >
                             Edit

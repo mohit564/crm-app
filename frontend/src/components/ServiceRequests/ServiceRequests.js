@@ -28,7 +28,10 @@ function ServiceRequests() {
             <h6 className="m-0">Service Requests</h6>
           </div>
           <div className="card-body">
-            <Link className="btn btn-secondary mb-4" to="/create-sr">
+            <Link
+              className="btn btn-secondary mb-4"
+              to="/service-requests/create"
+            >
               Create Service Request
             </Link>
             <div className="table-responsive">
@@ -66,7 +69,7 @@ function ServiceRequests() {
                         <td>{sr.dueDate}</td>
                         <td className="d-flex gap-2">
                           <Link
-                            to={`/edit-lead/${index + 1}`}
+                            to={`/service-requests/edit/${index + 1}`}
                             className="btn btn-sm btn-primary"
                           >
                             Edit

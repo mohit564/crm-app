@@ -7,7 +7,7 @@ import UserNav from "../UserNav";
 function Leads() {
   const [leads, setLeads] = useState([
     {
-      companyName: "Amazon Inc.",
+      company: "Amazon Inc.",
       location: " Seattle, Washington",
       date: "2015-10-20",
       status: "New",
@@ -24,7 +24,7 @@ function Leads() {
             <h6 className="m-0">Leads</h6>
           </div>
           <div className="card-body">
-            <Link className="btn btn-secondary mb-4" to="/create-lead">
+            <Link className="btn btn-secondary mb-4" to="/leads/create">
               Create Lead
             </Link>
             <div className="table-responsive">
@@ -50,13 +50,13 @@ function Leads() {
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{lead.companyName}</td>
+                        <td>{lead.company}</td>
                         <td>{lead.location}</td>
                         <td>{lead.date}</td>
                         <td>{lead.status}</td>
                         <td className="d-flex gap-2">
                           <Link
-                            to={`/edit-lead/${index + 1}`}
+                            to={`/leads/edit/${index + 1}`}
                             className="btn btn-sm btn-primary"
                           >
                             Edit

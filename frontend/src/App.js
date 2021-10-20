@@ -10,8 +10,14 @@ import Dashboard from "./components/Pages/Dashboard";
 import Register from "./components/Authentication/Register";
 import Users from "./components/Users/Users";
 import Leads from "./components/Leads/Leads";
+import CreateLead from "./components/Leads/CreateLead";
+import EditLead from "./components/Leads/EditLead";
 import Contacts from "./components/Contacts/Contacts";
+import CreateContact from "./components/Contacts/CreateContact";
+import EditContact from "./components/Contacts/EditContact";
 import ServiceRequests from "./components/ServiceRequests/ServiceRequests";
+import CreateServiceRequest from "./components/ServiceRequests/CreateServiceRequest";
+import EditServiceRequest from "./components/ServiceRequests/EditServiceRequest";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/NotFound";
 
