@@ -1,19 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
 
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+const TOKEN = localStorage.getItem("token");
+
+const server = axios.create({
+  baseURL: SERVER_URL,
+  headers: { Authorization: "Bearer " + TOKEN },
+});
+
 function Leads() {
-  const [leads, setLeads] = useState([
-    {
-      company: "Amazon Inc.",
-      location: " Seattle, Washington",
-      date: "2015-10-20",
-      status: "New",
-    },
-  ]);
-  useEffect(() => {}, []);
+  const [leads, setLeads] = useState([]);
+
+  useEffect(() => {
+    const request = axios.CancelToken.source();
+
+    server.get("/api/leads").then((response) => {
+      setLeads(response.data);
+    });
+
+    return () => {
+      request.cancel();
+    };
+  }, []);
+
+  function deleteLead(id) {
+    setLeads((prevLeads) => prevLeads.filter((lead) => lead._id !== id));
+    server.delete(`/api/leads/${id}`);
+  }
+
   return (
     <main className="d-flex m-0">
       <Sidebar />
@@ -48,25 +67,31 @@ function Leads() {
                 <tbody>
                   {leads.map((lead, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={lead._id}>
                         <td>{index + 1}</td>
                         <td>{lead.company}</td>
                         <td>{lead.location}</td>
-                        <td>{lead.date}</td>
+                        <td>
+                          {new Date(lead.date).toISOString().split("T")[0]}
+                        </td>
                         <td>{lead.status}</td>
-                        <td className="d-flex gap-2">
-                          <Link
-                            to={`/leads/edit/${index + 1}`}
-                            className="btn btn-sm btn-primary"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            className="btn btn-sm btn-danger"
-                            onClick={() => {}}
-                          >
-                            Delete
-                          </button>
+                        <td>
+                          <div className="d-flex align-items-center gap-2">
+                            <Link
+                              to={`/leads/edit/${lead._id}`}
+                              className="btn btn-sm btn-primary"
+                            >
+                              Edit
+                            </Link>
+                            <button
+                              className="btn btn-sm btn-danger"
+                              onClick={() => {
+                                deleteLead(lead._id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );

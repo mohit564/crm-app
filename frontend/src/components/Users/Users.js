@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
 
-function Users() {
-  const [users, setUsers] = useState([
-    {
-      firstName: "Mohit",
-      lastName: "Dhule",
-      email: "mohitmdhule@gmail.com",
-      role: "Admin",
-    },
-  ]);
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+const TOKEN = localStorage.getItem("token");
 
-  useEffect(() => {}, []);
+const server = axios.create({
+  baseURL: SERVER_URL,
+  headers: { Authorization: "Bearer " + TOKEN },
+});
+
+function Users() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const request = axios.CancelToken.source();
+
+    server.get("/api/users").then((response) => {
+      setUsers(response.data);
+    });
+
+    return () => {
+      request.cancel();
+    };
+  }, []);
 
   return (
     <main className="d-flex m-0">
@@ -45,7 +57,7 @@ function Users() {
                 <tbody>
                   {users.map((user, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={user._id}>
                         <td>{index + 1}</td>
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./UserNav.css";
 
 function UserNav() {
+  const [user, setUser] = useState("");
+  const history = useHistory();
+
+  useEffect(() => setUser(localStorage.getItem("user")), []);
+
   function openSidebar() {
     document.getElementById("sidebar").classList.toggle("active");
+  }
+
+  function onLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    history.push("/login");
   }
 
   return (
@@ -19,18 +31,13 @@ function UserNav() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {"Hello Mohit "}
+          {`Welcome, ${user} `}
         </section>
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
-            <a href="#" className="dropdown-item">
-              My Profile
-            </a>
-          </li>
-          <li>
-            <a href="#" className="dropdown-item">
+            <button onClick={onLogout} className="dropdown-item">
               Logout
-            </a>
+            </button>
           </li>
         </ul>
       </div>

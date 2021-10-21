@@ -41,7 +41,7 @@ function Register() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const response = await server.post("/api/user/register", values);
+      const response = await server.post("/api/auth/register", values);
       alert("Account created successfully.");
     } catch (error) {
       alert(error.response.data.message);
@@ -165,7 +165,7 @@ function Register() {
                               type="radio"
                               name="role"
                               id="admin"
-                              value="admin"
+                              value="Admin"
                             />
                             <label className="form-check-label" htmlFor="role">
                               Admin
@@ -177,7 +177,7 @@ function Register() {
                               type="radio"
                               name="role"
                               id="manager"
-                              value="manager"
+                              value="Manager"
                             />
                             <label className="form-check-label" htmlFor="role">
                               Manager
@@ -189,7 +189,7 @@ function Register() {
                               type="radio"
                               name="role"
                               id="employee"
-                              value="employee"
+                              value="Employee"
                             />
                             <label className="form-check-label" htmlFor="role">
                               Employee

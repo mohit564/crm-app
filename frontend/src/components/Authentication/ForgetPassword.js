@@ -31,7 +31,7 @@ function ForgetPassword() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const response = await server.post("/api/user/forget-password", values);
+      const response = await server.post("/api/auth/forget-password", values);
       alert(response.data);
     } catch (error) {
       alert(error.response.data.message);

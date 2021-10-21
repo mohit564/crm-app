@@ -35,7 +35,8 @@ function Login() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const response = await server.post("/api/user/login", values);
+      const response = await server.post("/api/auth/login", values);
+      localStorage.setItem("user", response.data.user);
       localStorage.setItem("token", response.data.token);
       history.push("/dashboard");
     } catch (error) {

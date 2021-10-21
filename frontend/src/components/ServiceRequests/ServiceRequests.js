@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
 
-function ServiceRequests() {
-  const [serviceRequests, setServiceRequests] = useState([
-    {
-      requestedBy: "Erwin E. Brown",
-      subject: "A new rating has been received",
-      assigned: "Debra J. Wilson",
-      priority: "Medium",
-      status: "Closed",
-      createdAt: "2015-02-07",
-      dueDate: "2015-02-09",
-    },
-  ]);
+const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+const TOKEN = localStorage.getItem("token");
 
-  useEffect(() => {}, []);
+const server = axios.create({
+  baseURL: SERVER_URL,
+  headers: { Authorization: "Bearer " + TOKEN },
+});
+
+function ServiceRequests() {
+  const [serviceRequests, setServiceRequests] = useState([]);
+
+  useEffect(() => {
+    const request = axios.CancelToken.source();
+
+    server.get("/api/serviceRequests").then((response) => {
+      setServiceRequests(response.data);
+    });
+
+    return () => {
+      request.cancel();
+    };
+  }, []);
+
+  function deleteServiceRequest(id) {
+    setServiceRequests((prevServiceRequests) =>
+      prevServiceRequests.filter((sr) => sr._id !== id)
+    );
+    server.delete(`/api/serviceRequests/${id}`);
+  }
+
   return (
     <main className="d-flex m-0">
       <Sidebar />
@@ -58,28 +75,36 @@ function ServiceRequests() {
                 <tbody>
                   {serviceRequests.map((sr, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={sr._id}>
                         <td>{index + 1}</td>
                         <td>{sr.requestedBy}</td>
                         <td>{sr.subject}</td>
                         <td>{sr.assigned}</td>
                         <td>{sr.priority}</td>
                         <td>{sr.status}</td>
-                        <td>{sr.createdAt}</td>
-                        <td>{sr.dueDate}</td>
-                        <td className="d-flex gap-2">
-                          <Link
-                            to={`/service-requests/edit/${index + 1}`}
-                            className="btn btn-sm btn-primary"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            className="btn btn-sm btn-danger"
-                            onClick={() => {}}
-                          >
-                            Delete
-                          </button>
+                        <td>
+                          {new Date(sr.createdAt).toISOString().split("T")[0]}
+                        </td>
+                        <td>
+                          {new Date(sr.dueDate).toISOString().split("T")[0]}
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center gap-2">
+                            <Link
+                              to={`/service-requests/edit/${sr._id}`}
+                              className="btn btn-sm btn-primary"
+                            >
+                              Edit
+                            </Link>
+                            <button
+                              className="btn btn-sm btn-danger"
+                              onClick={() => {
+                                deleteServiceRequest(sr._id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );

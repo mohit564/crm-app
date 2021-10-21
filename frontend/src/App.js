@@ -22,26 +22,49 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/NotFound";
 
 const App = (props) => {
+  let token = localStorage.getItem("token");
+
   return (
     <Router>
       <Switch>
-        <Route path="/" component={HomePage} exact />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/forget-password" component={ForgetPassword} />
+        <Route path="/" exact>
+          {token ? <Dashboard /> : <HomePage />}
+        </Route>
+        <Route path="/login" component={Login} exact />
+        <Route path="/register" component={Register} exact />
+        <Route path="/forget-password" component={ForgetPassword} exact />
 
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/users" component={Users} />
-        <Route path="/leads" component={Leads} />
-        <Route path="/contacts" component={Contacts} />
-        <Route path="/service-requests" component={ServiceRequests} />
-
-        {/* <ProtectedRoute path="/dashboard" component={Dashboard} />
-        <ProtectedRoute path="/users" component={Users} />
-        <ProtectedRoute path="/leads" component={Leads} />
-        <ProtectedRoute path="/contacts" component={Contacts} />
-        <ProtectedRoute path="/service-requests" component={ServiceRequests} /> */}
-
+        <ProtectedRoute path="/dashboard" component={Dashboard} exact />
+        <ProtectedRoute path="/users" component={Users} exact />
+        <ProtectedRoute path="/leads" component={Leads} exact />
+        <ProtectedRoute path="/leads/create" component={CreateLead} exact />
+        <ProtectedRoute path="/leads/edit/:id" component={EditLead} exact />
+        <ProtectedRoute path="/contacts" component={Contacts} exact />
+        <ProtectedRoute
+          path="/contacts/create"
+          component={CreateContact}
+          exact
+        />
+        <ProtectedRoute
+          path="/contacts/edit/:id"
+          component={EditContact}
+          exact
+        />
+        <ProtectedRoute
+          path="/service-requests"
+          component={ServiceRequests}
+          exact
+        />
+        <ProtectedRoute
+          path="/service-requests/create"
+          component={CreateServiceRequest}
+          exact
+        />
+        <ProtectedRoute
+          path="/service-requests/edit/:id"
+          component={EditServiceRequest}
+          exact
+        />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
