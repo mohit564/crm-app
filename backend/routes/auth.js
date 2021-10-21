@@ -1,4 +1,4 @@
-const router = require("Express").Router();
+const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const path = require("path");
@@ -8,7 +8,7 @@ const fs = require("fs");
 const ejs = require("ejs");
 
 const User = require("../models/User");
-const verifyToken = require("../middlewares/verifyToken");
+const verifyToken = require("../middlewares/ForgetPassword/verifyToken");
 
 const {
   registerValidation,
@@ -121,7 +121,10 @@ router.post("/login", async (req, res) => {
         },
         process.env.TOKEN_SECRET
       );
-      res.header("auth-token", token).json({ token: token });
+      res.header("auth-token", token).json({
+        user: `${userMatch.firstName} ${userMatch.lastName}`,
+        token: token,
+      });
     } else {
       res.status(401).json({
         message: "invalid username or password",

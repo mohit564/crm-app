@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const User = require("../models/User");
+const User = require("../../models/User");
 
-async function auth(req, res, next) {
+async function verifyToken(req, res, next) {
   const id = req.params.id;
   const token = req.params.token;
 
@@ -26,4 +26,4 @@ async function auth(req, res, next) {
   }
 }
 
-module.exports = auth;
+module.exports = verifyToken;
