@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import useAxiosInstance from "../../utils/useAxiosInstance";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
-
-const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
-const TOKEN = localStorage.getItem("token");
-
-const server = axios.create({
-  baseURL: SERVER_URL,
-  headers: { Authorization: "Bearer " + TOKEN },
-});
 
 function EditServiceRequest(props) {
   const [requestedBy, setRequestedBy] = useState("");
@@ -21,6 +14,7 @@ function EditServiceRequest(props) {
   const [status, setStatus] = useState("");
   const [dueDate, setDueDate] = useState("");
   const history = useHistory();
+  const server = useAxiosInstance();
 
   const { id } = useParams();
 

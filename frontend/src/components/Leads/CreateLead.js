@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import useAxiosInstance from "../../utils/useAxiosInstance";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
-
-const SERVER_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
-const TOKEN = localStorage.getItem("token");
-
-const server = axios.create({
-  baseURL: SERVER_URL,
-  headers: { Authorization: "Bearer " + TOKEN },
-});
 
 function CreateLead() {
   const [company, setCompany] = useState("");
@@ -19,6 +11,7 @@ function CreateLead() {
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("New");
   const history = useHistory();
+  const server = useAxiosInstance();
 
   async function submitHandler(event) {
     try {
