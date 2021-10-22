@@ -1,5 +1,6 @@
 ﻿const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -11,21 +12,29 @@ const serviceRequestsRoute = require("./routes/serviceRequests");
 const statsRoute = require("./routes/stats");
 
 const PORT = process.env.PORT || 5000;
+const ORIGIN = process.env.ORIGIN;
+const DB_HOST = process.env.DB_HOST;
 
 mongoose.connect(
-  process.env.DB_HOST,
+  DB_HOST,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Connected to DB");
   }
 );
 
+const corsOptions = {
+  origin: ORIGIN,
+  optionsSuccessStatus: 200, // for some legacy browsers
+};
+
 // configure express
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(helmet());
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/leads", leadsRoute);
