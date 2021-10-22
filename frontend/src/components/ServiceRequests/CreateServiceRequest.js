@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import useAxiosInstance from "../../utils/useAxiosInstance";
+import cogoToast from "cogo-toast";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
@@ -28,6 +29,7 @@ function CreateServiceRequest() {
         createdAt: new Date().toISOString().split("T")[0],
       };
       await server.post("/api/serviceRequests", serviceRequest);
+      cogoToast.success("Service Request added successfully!");
       history.push("/service-requests");
     } catch (error) {
       console.error(error.response.data.message);

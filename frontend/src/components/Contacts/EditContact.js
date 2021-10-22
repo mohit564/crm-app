@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import useAxiosInstance from "../../utils/useAxiosInstance";
+import cogoToast from "cogo-toast";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
@@ -40,6 +41,7 @@ function EditContact(props) {
     try {
       const contact = { name, phone, email, company };
       await server.put(`/api/contacts/${id}`, contact);
+      cogoToast.success("Contact edited successfully!");
       history.push("/contacts");
     } catch (error) {
       console.error(error.response.data.message);

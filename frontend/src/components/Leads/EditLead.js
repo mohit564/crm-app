@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import useAxiosInstance from "../../utils/useAxiosInstance";
+import cogoToast from "cogo-toast";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
@@ -40,6 +41,7 @@ function EditLead(props) {
     try {
       const lead = { company, location, date, status };
       await server.put(`/api/leads/${id}`, lead);
+      cogoToast.success("Lead edited successfully!");
       history.push("/leads");
     } catch (error) {
       console.error(error.response.data.message);

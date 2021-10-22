@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import useAxiosInstance from "../../utils/useAxiosInstance";
+import cogoToast from "cogo-toast";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
@@ -52,6 +53,7 @@ function EditServiceRequest(props) {
         dueDate,
       };
       await server.put(`/api/serviceRequests/${id}`, serviceRequest);
+      cogoToast.success("Service Request edited successfully!");
       history.push("/service-requests");
     } catch (error) {
       console.error(error.response.data.message);

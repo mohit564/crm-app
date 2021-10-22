@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import cogoToast from "cogo-toast";
 
 import "./Register.css";
 
@@ -17,6 +18,7 @@ const server = axios.create({
 });
 
 function Register() {
+  const history = useHistory();
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -41,10 +43,11 @@ function Register() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const response = await server.post("/api/auth/register", values);
-      alert("Account created successfully.");
+      await server.post("/api/auth/register", values);
+      cogoToast.success("Account created successfully. Try log in now.");
+      history.push("/login");
     } catch (error) {
-      alert(error.response.data.message);
+      cogoToast.error(error.response.data.message);
     } finally {
       resetForm();
     }

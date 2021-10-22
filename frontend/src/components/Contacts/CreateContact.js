@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import useAxiosInstance from "../../utils/useAxiosInstance";
+import cogoToast from "cogo-toast";
 
 import Sidebar from "../Sidebar";
 import UserNav from "../UserNav";
@@ -18,6 +19,7 @@ function CreateContact() {
       event.preventDefault();
       const contact = { name, phone, email, company };
       await server.post("/api/contacts", contact);
+      cogoToast.success("Contact added successfully!");
       history.push("/contacts");
     } catch (error) {
       console.error(error.response.data.message);

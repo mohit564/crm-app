@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import cogoToast from "cogo-toast";
 
 import "./UserNav.css";
 
@@ -16,6 +17,7 @@ function UserNav() {
   function onLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    cogoToast.success("Logout Successful. Please visit again.");
     history.push("/login");
   }
 

@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import cogoToast from "cogo-toast";
 
 import "./Login.css";
 
@@ -38,10 +39,11 @@ function Login() {
       const response = await server.post("/api/auth/login", values);
       localStorage.setItem("user", response.data.user);
       localStorage.setItem("token", response.data.token);
+      cogoToast.success("Login Successful!");
       history.push("/dashboard");
     } catch (error) {
+      cogoToast.error(error.response.data.message);
       console.log(error);
-      alert(error.response.data.message);
     } finally {
       resetForm();
     }
