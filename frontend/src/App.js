@@ -6,7 +6,7 @@ import "./App.css";
 import HomePage from "./components/HomePage";
 import Login from "./components/Authentication/Login";
 import ForgetPassword from "./components/Authentication/ForgetPassword";
-import Dashboard from "./components/Pages/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Register from "./components/Authentication/Register";
 import Users from "./components/Users/Users";
 import Leads from "./components/Leads/Leads";
@@ -19,7 +19,7 @@ import ServiceRequests from "./components/ServiceRequests/ServiceRequests";
 import CreateServiceRequest from "./components/ServiceRequests/CreateServiceRequest";
 import EditServiceRequest from "./components/ServiceRequests/EditServiceRequest";
 import ProtectedRoute from "./components/ProtectedRoute";
-import NotFound from "./components/Pages/NotFound";
+import NotFound from "./components/NotFound/NotFound";
 
 const App = (props) => {
   let token = localStorage.getItem("token");
