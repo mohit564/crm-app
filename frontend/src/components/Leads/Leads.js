@@ -20,7 +20,7 @@ function Leads() {
     return () => {
       request.cancel();
     };
-  }, [server]);
+  }, []);
 
   function deleteLead(id) {
     setLeads((prevLeads) => prevLeads.filter((lead) => lead._id !== id));

@@ -34,7 +34,7 @@ function EditLead(props) {
     return () => {
       request.cancel();
     };
-  }, [history, id, server]);
+  }, [id]);
 
   async function submitHandler(event) {
     event.preventDefault();

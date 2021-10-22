@@ -20,7 +20,8 @@ function Dashboard() {
     return () => {
       request.cancel();
     };
-  }, [server]);
+  }, []);
+
   return (
     <main className="d-flex m-0">
       <Sidebar />
