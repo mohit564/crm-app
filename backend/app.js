@@ -8,6 +8,7 @@ const usersRoute = require("./routes/users");
 const leadsRoute = require("./routes/leads");
 const contactsRoute = require("./routes/contacts");
 const serviceRequestsRoute = require("./routes/serviceRequests");
+const statsRoute = require("./routes/stats");
 
 const PORT = process.env.PORT || 5000;
 
@@ -30,6 +31,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/leads", leadsRoute);
 app.use("/api/contacts", contactsRoute);
 app.use("/api/serviceRequests", serviceRequestsRoute);
+app.use("/api/stats", statsRoute);
 
 app.get("/", (req, res) => {
   res.send("Welcome to CRM App!!! Created by Mohit Dhule.");
