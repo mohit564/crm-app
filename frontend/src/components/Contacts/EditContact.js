@@ -77,7 +77,7 @@ function EditContact(props) {
                   type="tel"
                   id="phone"
                   name="phone"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  pattern="(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*"
                   placeholder="Enter Phone Number"
                   className="form-control"
                   value={phone}
