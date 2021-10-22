@@ -19,7 +19,7 @@ function Users() {
     return () => {
       request.cancel();
     };
-  }, []);
+  }, [server]);
 
   return (
     <main className="d-flex m-0">

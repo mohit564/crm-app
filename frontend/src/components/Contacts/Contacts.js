@@ -20,7 +20,7 @@ function Contacts() {
     return () => {
       request.cancel();
     };
-  }, []);
+  }, [server]);
 
   function deleteContact(id) {
     setContacts((prevContacts) =>

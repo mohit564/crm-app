@@ -20,7 +20,7 @@ function ServiceRequests() {
     return () => {
       request.cancel();
     };
-  }, []);
+  }, [server]);
 
   function deleteServiceRequest(id) {
     setServiceRequests((prevServiceRequests) =>

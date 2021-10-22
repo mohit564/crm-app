@@ -37,7 +37,7 @@ function EditServiceRequest(props) {
     return () => {
       request.cancel();
     };
-  }, []);
+  }, [history, id, server]);
 
   async function submitHandler(event) {
     event.preventDefault();

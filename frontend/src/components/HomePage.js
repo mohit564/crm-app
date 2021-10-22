@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./HomePage.css";
 
@@ -26,6 +25,7 @@ function HomePage() {
                 href="https://en.wikipedia.org/wiki/Customer_relationship_management"
                 role="button"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Learn more »
               </a>
